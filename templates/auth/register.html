@@ -1,42 +1,47 @@
 {% extends "base/base.html" %}
+{% load static %}
+
 
 {% block title %}Register{% endblock title %}
 
+
 {% block content %}
-<h2>Register</h2>
-<div class="form">
+<h1>Register</h1>
+<div class="formContainer">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <div class="username mb-3">
+            <label for="id_username" class="form-label">Username</label>
+            <input type="text" class="form-control" name="username" id="id_username" value="{{ form.username.value|default:'' }}">
+            <div class="error"> {{form.username.errors}} </div>
+            <div class="helpText"> {{form.username.help_text}} </div>
+        </div>
 
-        <label for="id_username">Username</label>
-        <input type="text" name="username" id="id_username" value="{{ form.username.value|default:'' }}">
-        <div class="error"> {{form.username.errors}} </div>
+        <div class="email mb-3">
+            <label for="id_email" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" id="id_email" value="{{ form.email.value|default:'' }}">
+            <div class="error"> {{form.email.errors}} </div>
+        </div>
 
-        <label for="id_email">Email</label>
-        <input type="email" name="email" id="id_email" value="{{ form.email.value|default:'' }}">
-        <div class="error"> {{form.email.errors}} </div>
+        <div class="password mb-3">
+            <label for="id_password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" id="id_password">
+            <div class="error"> {{form.password1.errors}} </div>
+            <div class="helpText"> {{form.password1.help_text}} </div>
+        </div>
 
-        <label for="id_password">Password</label>
-        <input type="password" name="password" id="id_password">
-        <div class="error"> {{form.password1.errors}} </div>
-
-        <label for="id_confirm_password">Confirm Password</label>
-        <input type="password" name="password" id="id_confirm_password">
-        <div class="error"> {{form.password2.errors}} </div>
-
-        <button type="submit">Register</button>
+        <div class="password mb-3">
+            <label for="id_confirm_password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" name="password" id="id_confirm_password">
+            <div class="error"> {{form.password2.errors}} </div>
+            <div class="helpText"> {{form.password2.help_text}} </div>
+        </div>
+        <button type="submit" class="regButt">Register</button>
     </form>
-    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'login' %}" class="logLink">Login</a>
 </div>
 {% endblock content %}
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let errorElements = document.querySelectorAll('.error');
-        errorElements.forEach(errorElement =>  {
-            if (error.textContent.trim() !== '') {
-                error.classList.add("show");
-            }
-            });
-    });
-</script>
+{% block script %}
+    <script src="{% static 'js\errors.js' %}"></script>
+{% endblock script %}

@@ -1,6 +1,6 @@
 /* Error class to show errors */
 .error {
-    display: none;
+    display: block;
     color: red;
     font-weight: bold;
     border: 1px solid red;
@@ -12,4 +12,19 @@
 
 .error.show {
     display: block;
+}
+
+.formContainer {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+h1 {
+    text-align: center;
+    font-size: 120px;
 }

@@ -7,7 +7,7 @@ from .forms import CustomUserCreationForm
 
 def register(request):
     if request.method == "POST":
-        form = CustomUserCreationForm(request.POST, request.FILES)
+        form = CustomUserCreationForm(data=request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
